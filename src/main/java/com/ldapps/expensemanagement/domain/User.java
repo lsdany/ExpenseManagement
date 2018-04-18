@@ -31,7 +31,7 @@ public class User {
     @OneToOne
     private Balance balance;
 
-    @OneToMany
-    private Set<Discount> discounts;
+    //@OneToMany
+    //private Set<Discount> discounts;
 
 }
