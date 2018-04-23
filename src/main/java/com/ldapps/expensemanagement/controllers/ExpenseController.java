@@ -33,6 +33,6 @@ public class ExpenseController {
 
     @PostMapping("expenses")
     public void createExpense(Expense expense){
-
+        expenseService.saveExpense(expense);
     }
 }

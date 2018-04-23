@@ -39,5 +39,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     public void saveExpense(Expense expense) {
 
     }
+
+    @Override
+    public Expense updateExpense(Expense expense) {
+        return null;
+    }
 }
 

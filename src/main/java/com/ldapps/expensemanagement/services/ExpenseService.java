@@ -20,4 +20,6 @@ public interface ExpenseService {
 
     void saveExpense(Expense expense);
 
+    Expense updateExpense(Expense expense);
+
 }
