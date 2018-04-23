@@ -1,11 +1,13 @@
 package com.ldapps.expensemanagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -28,10 +30,18 @@ public class User {
     private String email;
     private BigDecimal salary;
 
-    @OneToOne
-    private Balance balance;
+//    @OneToOne
+//    private Balance balance;
 
-    //@OneToMany
-    //private Set<Discount> discounts;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private Set<Discount> discounts;
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private Set<Expense> expenses = new HashSet<>();
+
+
 
 }

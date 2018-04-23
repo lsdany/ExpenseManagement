@@ -1,12 +1,11 @@
 package com.ldapps.expensemanagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -17,6 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+//@EqualsAndHashCode(exclude = "user")
 public class Expense {
 
     @Id
@@ -26,6 +26,13 @@ public class Expense {
     private String description;
     private BigDecimal amount;
     private LocalDateTime date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USER_ID")
+    @JsonBackReference
+    private User user;
+
+    //private Category category;
 
 
 }

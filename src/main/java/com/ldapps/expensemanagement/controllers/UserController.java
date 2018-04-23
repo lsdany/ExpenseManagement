@@ -3,9 +3,7 @@ package com.ldapps.expensemanagement.controllers;
 import com.ldapps.expensemanagement.domain.User;
 import com.ldapps.expensemanagement.services.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
@@ -17,8 +15,12 @@ import java.util.Set;
 @RestController
 public class UserController {
 
-    @Autowired
+
     UserService userService;
+
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
 
     //@RequestMapping("/users")
     @GetMapping("/users")
