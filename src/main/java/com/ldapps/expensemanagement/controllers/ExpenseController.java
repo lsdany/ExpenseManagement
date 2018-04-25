@@ -4,8 +4,10 @@ import com.ldapps.expensemanagement.domain.Expense;
 import com.ldapps.expensemanagement.domain.User;
 import com.ldapps.expensemanagement.services.ExpenseService;
 import com.ldapps.expensemanagement.services.UserService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.Set;
 
 /**
@@ -42,12 +44,20 @@ public class ExpenseController {
         System.out.println("id: "+id);
 
         User user = userService.findById(id);
-
-        user.setExpenses(null);
         expense.setUser(user);
 
         return expenseService.saveExpense(expense);
     }
+
+
+//    @RequestMapping(value = "/expenses/", method = RequestMethod.POST, consumes = "multipart/form-data" ,
+//            produces = { "application/json", "application/xml" })
+//    public Expense postPaiment(@RequestBody Expense expense, @RequestParam Long id) {
+//
+//        User user = userService.findById(id);
+//        expense.setUser(user);
+//        return expenseService.saveExpense(expense);
+//    }
 
 //    @PutMapping("")
 //    public Expense updateExpense(){
