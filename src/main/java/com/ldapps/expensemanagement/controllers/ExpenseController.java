@@ -43,6 +43,7 @@ public class ExpenseController {
 
         User user = userService.findById(id);
 
+        user.setExpenses(null);
         expense.setUser(user);
 
         return expenseService.saveExpense(expense);
