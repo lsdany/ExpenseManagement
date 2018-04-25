@@ -1,9 +1,13 @@
 package com.ldapps.expensemanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,6 +20,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@ToString
 //@EqualsAndHashCode(exclude = "user")
 public class Expense {
 
@@ -25,6 +30,9 @@ public class Expense {
     private String name;
     private String description;
     private BigDecimal amount;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @CreatedDate
     private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)

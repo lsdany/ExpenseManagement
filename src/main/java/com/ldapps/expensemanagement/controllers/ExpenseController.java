@@ -1,10 +1,10 @@
 package com.ldapps.expensemanagement.controllers;
 
 import com.ldapps.expensemanagement.domain.Expense;
+import com.ldapps.expensemanagement.domain.User;
 import com.ldapps.expensemanagement.services.ExpenseService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ldapps.expensemanagement.services.UserService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -13,26 +13,43 @@ import java.util.Set;
  * @date 2018-04-22
  */
 @RestController
+@RequestMapping("/api")
 public class ExpenseController {
 
     ExpenseService expenseService;
 
-    public ExpenseController(ExpenseService expenseService){
+    UserService userService;
+
+    public ExpenseController(ExpenseService expenseService, UserService userService){
         this.expenseService = expenseService;
+        this.userService = userService;
     }
 
     /**
      * Entrega el listado de gastos en general
      * @return
      */
-    @GetMapping("/expenses")
+    @GetMapping("/expenses/")
     public Set<Expense> getExpenses(){
         Set<Expense> expenses = expenseService.getExpenses();
         return expenses;
     }
 
-    @PostMapping("expenses")
-    public void createExpense(Expense expense){
-        expenseService.saveExpense(expense);
+    @PostMapping("/expenses/")
+    public Expense createExpense(@ModelAttribute Expense expense,@RequestParam Long id){
+
+        System.out.println("en create: objeto: "+expense.toString());
+        System.out.println("id: "+id);
+
+        User user = userService.findById(id);
+
+        expense.setUser(user);
+
+        return expenseService.saveExpense(expense);
     }
+
+//    @PutMapping("")
+//    public Expense updateExpense(){
+//        return null;
+//    }
 }
