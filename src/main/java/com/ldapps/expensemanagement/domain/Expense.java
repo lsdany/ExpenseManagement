@@ -19,9 +19,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
-//@EqualsAndHashCode(exclude = "user")
+//@NoArgsConstructor
+//@AllArgsConstructor
+@EqualsAndHashCode(exclude = "user")
 public class Expense implements Serializable {
 
     @Id
@@ -31,9 +31,9 @@ public class Expense implements Serializable {
     private String description;
     private BigDecimal amount;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @CreatedDate
-    private LocalDateTime date;
+//    @JsonFormat(pattern="yyyy-MM-dd")
+//    @CreatedDate
+//    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="USER_ID")

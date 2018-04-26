@@ -7,6 +7,7 @@ import com.ldapps.expensemanagement.services.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.awt.*;
 import java.util.Set;
 
@@ -37,14 +38,34 @@ public class ExpenseController {
         return expenses;
     }
 
-    @PostMapping("/expenses/")
-    public Expense createExpense(@ModelAttribute Expense expense,@RequestParam Long id){
+    @PostMapping("/expenses")
+    //public @ResponseBody Expense createExpense(@Valid @RequestBody Expense expense, @RequestParam Long id){
+    public Expense createExpense(@ModelAttribute Expense expense, @RequestParam("id") Long id){
+        System.out.println("en create: objeto: "+expense.toString());
+        System.out.println("id: "+id);
+
+//        expense.setId(null);
+
+        //User user = userService.findById(id);
+        //expense.setUser(user);
+
+        System.out.println("------------"+expense.toString());
+
+        return null; //expenseService.saveExpense(expense);
+    }
+
+
+    @RequestMapping(value = "/e",  method = RequestMethod.POST)
+    public @ResponseBody Expense test(@RequestParam("id") Long id, @RequestBody Expense expense) {
+
 
         System.out.println("en create: objeto: "+expense.toString());
         System.out.println("id: "+id);
 
         User user = userService.findById(id);
         expense.setUser(user);
+
+        //System.out.println(expense.toString());
 
         return expenseService.saveExpense(expense);
     }

@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author luisdany pernillo
  */
 public interface ExpenseRepository extends CrudRepository<Expense, Long> {
+
 }
