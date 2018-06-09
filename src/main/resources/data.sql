@@ -2,7 +2,7 @@
 
 
 --insert into user (name, email,salary, balance_id) values ('luisdany', 'luisdany@gmail.com', 20000, 1);
-insert into user (name, email,salary) values ('rosalba', 'rosalba@gmail.com', 20000);
+insert into user (name, email,salary, balance) values ('rosalba', 'rosalba@gmail.com', 20000,20000);
 --insert into user (name, email,salary) values ('abraham', 'abraham@gmail.com', 20000);
 --insert into user (name, email,salary) values ('josselin', 'josselin@gmail.com', 20000);
 
@@ -11,3 +11,5 @@ insert into user (name, email,salary) values ('rosalba', 'rosalba@gmail.com', 20
 --insert into expense ( amount, date, description, name, user_id) values ( 15, sysdate, 'Pago de parqueo cc', 'pago', 1);
 
 --insert into expense ( amount, date, description, name) values ( 15, sysdate, 'Pago de parqueo cc', 'pago');
+
+--insert into balance (balance, userId) values (12000,1);

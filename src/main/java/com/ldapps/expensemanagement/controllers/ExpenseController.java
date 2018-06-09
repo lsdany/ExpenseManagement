@@ -4,11 +4,8 @@ import com.ldapps.expensemanagement.domain.Expense;
 import com.ldapps.expensemanagement.domain.User;
 import com.ldapps.expensemanagement.services.ExpenseService;
 import com.ldapps.expensemanagement.services.UserService;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.awt.*;
 import java.util.Set;
 
 /**
@@ -38,50 +35,35 @@ public class ExpenseController {
         return expenses;
     }
 
-    @PostMapping("/expenses")
-    //public @ResponseBody Expense createExpense(@Valid @RequestBody Expense expense, @RequestParam Long id){
-    public Expense createExpense(@ModelAttribute Expense expense, @RequestParam("id") Long id){
-        System.out.println("en create: objeto: "+expense.toString());
-        System.out.println("id: "+id);
 
-//        expense.setId(null);
-
-        //User user = userService.findById(id);
-        //expense.setUser(user);
-
-        System.out.println("------------"+expense.toString());
-
-        return null; //expenseService.saveExpense(expense);
-    }
-
-
-    @RequestMapping(value = "/e",  method = RequestMethod.POST)
-    public @ResponseBody Expense test(@RequestParam("id") Long id, @RequestBody Expense expense) {
-
-
-        System.out.println("en create: objeto: "+expense.toString());
-        System.out.println("id: "+id);
+    @RequestMapping(value = "/expenses",  method = RequestMethod.POST)
+    public @ResponseBody Expense createExpense(@RequestParam("id") Long id, @RequestBody Expense expense) {
 
         User user = userService.findById(id);
         expense.setUser(user);
 
-        //System.out.println(expense.toString());
-
         return expenseService.saveExpense(expense);
     }
 
+    @PutMapping
 
-//    @RequestMapping(value = "/expenses/", method = RequestMethod.POST, consumes = "multipart/form-data" ,
-//            produces = { "application/json", "application/xml" })
-//    public Expense postPaiment(@RequestBody Expense expense, @RequestParam Long id) {
-//
-//        User user = userService.findById(id);
-//        expense.setUser(user);
-//        return expenseService.saveExpense(expense);
-//    }
+    /**
+     * TODO recursive problem
+     * @param id
+     * @return
+     */
+    @GetMapping("/expenses/{id}/expense")
+    public Expense getExpenseById(@PathVariable Long id){
 
-//    @PutMapping("")
-//    public Expense updateExpense(){
+        System.out.println("valor del id " + id);
+
+        Expense expense = expenseService.findById(id);
+
+        System.out.println("Valor de expense "+ expense.toString());
+
+        return expense;
 //        return null;
-//    }
+    }
+
+
 }

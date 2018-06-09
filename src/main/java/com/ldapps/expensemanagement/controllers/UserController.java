@@ -2,11 +2,9 @@ package com.ldapps.expensemanagement.controllers;
 
 import com.ldapps.expensemanagement.domain.User;
 import com.ldapps.expensemanagement.services.UserService;
+
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -14,24 +12,47 @@ import java.util.Set;
  * @author Luisdany Pernillo
  */
 @RestController
+@Slf4j
 public class UserController {
 
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    UserService userService;
+    private UserService userService;
 
     public UserController(UserService userService){
         this.userService = userService;
     }
 
-    //@RequestMapping("/users")
-    @GetMapping("/users")
+    /**
+     * Getting the information of all the users
+     * @return
+     */
+    @GetMapping("/users/")
     public Set<User> getUsers(){
-        logger.debug("executing getusers");
+        log.debug("executing getusers");
         return userService.getUsers();
     }
 
-    //public Set<User> getUsers(@RequestParam(value="id", defaultValue = "1") Long id){
+    @PostMapping("/users/")
+    public User createUser(@RequestBody User user){
+        log.debug("user "+user.toString());
+        return userService.saveUser(user);
+
+    }
+
+    @PutMapping ("/users/")
+    public User updateUser(@RequestBody User user){
+
+        return userService.saveUser(user);
+    }
+
+    @GetMapping("/users/{id}/user")
+    public User getUserById(@PathVariable Long id){
+        return userService.findById(id);
+    }
+
+    @DeleteMapping("/users/{id}/user")
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteById(id);
+    }
+
 
 }

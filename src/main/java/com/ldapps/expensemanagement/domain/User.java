@@ -29,16 +29,9 @@ public class User {
     private String name;
     private String email;
     private BigDecimal salary;
+    private BigDecimal balance;
 
-//    @OneToOne
-//    private Balance balance;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    private Set<Discount> discounts;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Expense> expenses = new HashSet<>();
 
